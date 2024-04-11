@@ -18,26 +18,33 @@ class BorsaTest {
 	
 	@Test
 	public void TestBorsaConUnAttrezzoSiaDiversaDaNull() {
-		assertNull(this.borsa.getAttrezzo(ATTREZZO));
+	     Attrezzo attrezzo = CreoUnAttrezzoEMettiInBorsa(this.borsa,ATTREZZO,1 );
+	     assertEquals(attrezzo,this.borsa.getAttrezzo(ATTREZZO));
 		}
 	
 	@Test
 	public void TestAttrezzoTroppoPesante() {
-		//Attrezzo attrezzo=  new Attrezzo("Attrezzo troppo pesante",DEFAULT_PESO_MAX_BORSA+1 );
+		Attrezzo attrezzoPesante =  new Attrezzo("Attrezzo troppo pesante",DEFAULT_PESO_MAX_BORSA+1 );
+		assertFalse(this.borsa.addAttrezzo(attrezzoPesante));
 	}
 	
+	@Test
+	public void verificoCheLaBorsaSiaVuota() {
+		assertNull(this.borsa.getAttrezzo(null));
+	}
 	
-	
-	
-	
-	
+	@Test
+	public void verificoInserimento() {
+		Attrezzo attrezzo = CreoUnAttrezzoEMettiInBorsa(this.borsa,"spada",1 );
+		assertNotEquals(attrezzo,this.borsa.getAttrezzo(ATTREZZO));
+	}
 	
 	
 	//metodo di utilità per l'aggiunta di attrezzi nella borsa
-	/*private Attrezzo CreoUnAttrezzoEMettiInBorsa(Borsa borsa,String nomeAttrezzo,int peso) {
+	private Attrezzo CreoUnAttrezzoEMettiInBorsa(Borsa borsa,String nomeAttrezzo,int peso) {
 		Attrezzo attrezzo = new Attrezzo(nomeAttrezzo,peso);
-		
-		return         ;
+		borsa.addAttrezzo(attrezzo);
+		return attrezzo;        
 	}
-	*/
+	
 }
