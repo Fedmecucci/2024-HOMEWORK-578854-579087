@@ -27,7 +27,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
 
 	private Partita partita;
 
@@ -67,6 +67,13 @@ public class DiaDia {
 			this.vai(comandoDaEseguire.getParametro());
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
+		
+		else if(comandoDaEseguire.getNome().equals("prendi"))
+			this.prendi(comandoDaEseguire.getParametro());
+		
+		else if(comandoDaEseguire.getNome().equals("posa"))
+			this.posa(comandoDaEseguire.getParametro());
+		
 		else
 			System.out.println("Comando sconosciuto");
 		if (this.partita.vinta()) {
@@ -77,6 +84,30 @@ public class DiaDia {
 	}   
 
 	// implementazioni dei comandi dell'utente:
+	private void prendi(String nomeAttrezzo) {
+		
+		Attrezzo attrezzo = this.partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
+		if(this.partita.getStanzaCorrente().removeAttrezzo(attrezzo)) {
+			this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
+			System.out.println("Attrezzo inserito nella borsa");
+		}
+		else
+			System.out.println("Attrezzo non presente nella stanza");
+	}
+	private void posa(String nomeAttrezzo) {
+		
+		Attrezzo a = this.partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
+		if(a==null)
+			System.out.println("Attrezzo non presente nella borsa");
+		boolean aggiunta;
+		if(a != null) {
+			aggiunta = this.partita.getStanzaCorrente().addAttrezzo(a);
+			if(aggiunta==true)
+				System.out.println("Attrezzo posato nella stanza");
+			else
+				System.out.println("Attrezzo non posato nella stanza poiché piena");
+		}
+	}
 
 	/**
 	 * Stampa informazioni di aiuto.
