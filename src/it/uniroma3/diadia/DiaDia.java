@@ -34,9 +34,9 @@ public class DiaDia {
 
 	private Partita partita;
 
-	private IOConsole ioConsole;
+	private IO ioConsole;
 
-	public DiaDia(IOConsole ioConsole) {
+	public DiaDia(IO ioConsole) {
 		this.partita = new Partita();
 		this.ioConsole = ioConsole;
 	}
@@ -59,7 +59,7 @@ public class DiaDia {
 	private boolean processaIstruzione(String istruzione) {
 		 Comando comandoDaEseguire;
 		 FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
-		 comandoDaEseguire = factory.costruisciComando(istruzione);
+		 comandoDaEseguire = factory.costruisciComando(istruzione,this.ioConsole);
 		 comandoDaEseguire.esegui(this.partita); 
 		 if (this.partita.vinta())
 		     this.ioConsole.mostraMessaggio("Hai vinto!");
@@ -71,7 +71,7 @@ public class DiaDia {
 	
 
 	public static void main(String[] argc) {
-		IOConsole ioConsole = new IOConsole();
+		IO ioConsole = new IOConsole();
 		DiaDia gioco = new DiaDia(ioConsole);
 		gioco.gioca();
 	}

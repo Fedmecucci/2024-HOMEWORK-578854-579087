@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -11,7 +12,7 @@ import it.uniroma3.diadia.ambienti.Stanza;
 
 public class ComandoVai implements Comando {
 	
-	public IOConsole ioConsole = new IOConsole();
+	public IO ioConsole;
 	private String direzione;
 	public String nome;
 	public String parametro;
@@ -50,4 +51,10 @@ public class ComandoVai implements Comando {
     public String getParametro() {
 		return this.direzione;
     }
+
+
+	@Override
+	public void setIo(IO ioConsole) {
+		this.ioConsole = ioConsole;
+		}
 }

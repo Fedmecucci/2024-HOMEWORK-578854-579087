@@ -1,12 +1,13 @@
 package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPosa implements Comando {
 	
-	private IOConsole ioConsole = new IOConsole();
+	private IO ioConsole;
 	private String nomeAttrezzo;
 	
     public void esegui(Partita partita){
@@ -32,4 +33,9 @@ public class ComandoPosa implements Comando {
     public String getParametro() {
 		return this.nomeAttrezzo;
     }
+	@Override
+	public void setIo(IO ioConsole) {
+		this.ioConsole=ioConsole;
+		
+	}
 }

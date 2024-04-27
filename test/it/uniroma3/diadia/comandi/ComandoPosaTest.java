@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -17,6 +18,7 @@ class ComandoPosaTest {
 	public void setUp() {
 		this.partita = new Partita();
 		this.comandoPosa = new ComandoPosa();
+		this.comandoPosa.setIo(new IOConsole());
 		Attrezzo attrezzo = new Attrezzo("attrezzo",1);
 		this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
 	}
