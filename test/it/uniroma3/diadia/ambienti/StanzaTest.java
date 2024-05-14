@@ -1,10 +1,16 @@
 package it.uniroma3.diadia.ambienti;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaTest {
 
@@ -14,11 +20,18 @@ class StanzaTest {
 		private static final String STANZA_ADIACENTE = "StanzaAdiacente";
 		private static final String NORD = "nord";
 		
+		protected Attrezzo a;
+		protected Map<String,Attrezzo> attrezzi;
+		protected List<String> directions;
 	    protected Stanza stanza;
+	    protected int numeroAttrezzi;
 	    
 	    @BeforeEach
 	    public void setUp() {
 	    	this.stanza = new Stanza(STANZA);
+	    	this.a = new Attrezzo(ATTREZZO, 24);
+	    	this.attrezzi = new HashMap<String,Attrezzo>();
+	    	directions = new ArrayList<String>();
 	    }
 	    
 	    @Test
@@ -47,8 +60,57 @@ class StanzaTest {
 	  
 	    @Test
 	    public void testGetDirezionivuoto() {
-	    	assertArrayEquals(new String[0], this.stanza.getDirezioni());
+	    	assertEquals(this.directions, this.stanza.getDirezioni());
 	    }
+	    
+	    
+	    //Nuovi test dopo implementazione collezioni
+	    @Test
+	    public void testGetDirezioniNonVuoto() {
+	    	this.directions.add(NORD);
+	    	creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, NORD);
+	    	assertEquals(this.directions, this.stanza.getDirezioni());
+	    }
+	    
+	    @Test
+	    public void testgetAttrezziNonVuoto() {
+	    	this.attrezzi.put(this.a.getNome(), this.a);
+	    	this.stanza.addAttrezzo(this.a);
+	    	assertEquals(this.stanza.getAttrezzi(), this.attrezzi);
+	    }
+	    @Test
+	    public void testgetAttrezziVuoto() {
+	    	attrezzi.put(this.a.getNome(), this.a);
+	    	//this.stanza.addAttrezzo(this.a);
+	    	assertNotEquals(this.stanza.getAttrezzi(), this.attrezzi);
+	    }
+	    
+	    @Test
+	    public void testAddAttrezzoRiuscito() {
+	    	this.attrezzi.put(a.getNome(), a);
+	    	this.stanza.addAttrezzo(a);
+	    	assertEquals(this.stanza.getAttrezzi(), this.attrezzi);
+	    }
+	    
+	    @Test
+	    public void testAddAttrezzoNonRiuscito() {
+	    	this.stanza.setNumeroAttrezzi(10);
+	    	this.attrezzi.put(a.getNome(), a);
+	    	this.stanza.addAttrezzo(a);
+	    	assertNotEquals(this.stanza.getAttrezzi(), this.attrezzi);
+	    }
+	    
+	    @Test
+	    public void removeAttrezzoSuMapVuota() {
+	    	assertEquals(false, this.stanza.removeAttrezzo(a));
+	    }
+	    
+	    @Test
+	    public void removeAttrezzoSuMapNonVuota() {
+	    	this.stanza.addAttrezzo(a);
+	    	assertEquals(true, this.stanza.removeAttrezzo(a));
+	    }
+	    
 	    
 	 // metodo di utilita per risparmiare righe di codice(in cui creo stanza adiacente)
 	    
