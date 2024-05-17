@@ -93,13 +93,13 @@ public class Borsa {
 		 Collections.sort(result);
 		 return result;
 	 }
-	 SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso() {
+	 public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso() {
 		 SortedSet<Attrezzo> result = new TreeSet<>();
 		 result.addAll(this.attrezzi.values());
 		 return result;
 	 }
 	 
-	 SortedSet<Attrezzo> getContenutoOrdinatoPerNome() {
+	 public SortedSet<Attrezzo> getContenutoOrdinatoPerNome() {
 		 SortedSet<Attrezzo> result = new TreeSet<>(new ComparatoreAttrezzi());
 		 for(Attrezzo a : this.attrezzi.values())
 			 result.add(a);

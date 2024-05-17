@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -21,15 +22,20 @@ class BorsaTest {
 	private final static String ATTREZZO = "attrezzoSemplice";
 	
 	private List<Attrezzo> confronto;
-	private SortedSet<Attrezzo> confront;
+	private Borsa confront;
+	
+	Attrezzo cacciavite;
+	Attrezzo martello;
+	Attrezzo chiaveInglese;
+	
 	
 	@BeforeEach
 	public void setUp() {
 		this.borsa= new Borsa(DEFAULT_PESO_MAX_BORSA);
 		
-		Attrezzo martello = new Attrezzo("Martello", 3);
-        Attrezzo chiaveInglese = new Attrezzo("Chiave inglese", 2);
-        Attrezzo cacciavite = new Attrezzo("Cacciavite", 1);
+		this.martello = new Attrezzo("Martello", 2);
+        this.chiaveInglese = new Attrezzo("Chiave inglese", 3);
+        this.cacciavite = new Attrezzo("Cacciavite", 1);
         
         borsa.addAttrezzo(martello);
         borsa.addAttrezzo(chiaveInglese);
@@ -37,14 +43,15 @@ class BorsaTest {
         
         confronto = new ArrayList<>();
         confronto.add(cacciavite);
-        //confronto.add(martello); se cambio il loro ordine, non risultano più ordinati per peso e il test dà falso
-        confronto.add(chiaveInglese);
         confronto.add(martello);
+        confronto.add(chiaveInglese);
+        //confronto.add(martello); //se cambio il loro ordine, non risultano più ordinati per peso e il test dà falso
         
-        confront = new TreeSet<>(new ComparatoreAttrezzi());  //ordina anche senza comparatore, poiché usa il compareTo definito da me dentro Attrezzo
-        confront.add(cacciavite);
-        confront.add(martello);
-        confront.add(chiaveInglese);
+        confront = new Borsa();  //ordina anche senza comparatore, poiché usa il compareTo definito da me dentro Attrezzo
+        confront.addAttrezzo(chiaveInglese);
+        confront.addAttrezzo(cacciavite);
+        confront.addAttrezzo(martello);
+        
 	}
 	
 	@Test
@@ -79,8 +86,12 @@ class BorsaTest {
 	@Test
 	public void testContenutoOrdinatoPerNome() {
         // Ottieni il contenuto ordinato per nome
-        SortedSet<Attrezzo> contenutoOrdinato = borsa.getContenutoOrdinatoPerNome();
-        assertEquals(contenutoOrdinato, confront);
+        SortedSet<Attrezzo> contenutoOrdinato = confront.getContenutoOrdinatoPerNome();
+        Iterator<Attrezzo> i = contenutoOrdinato.iterator();
+        assertEquals(cacciavite,i.next());
+        assertEquals(chiaveInglese,i.next());
+        assertEquals(martello, i.next());
+        //assertEquals(contenutoOrdinato, confront);
 	}
 	
 	
