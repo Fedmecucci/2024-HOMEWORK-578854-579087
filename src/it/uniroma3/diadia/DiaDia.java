@@ -49,6 +49,7 @@ public class DiaDia {
 	
 	//costruttore per LabirintoBuilder
 	public DiaDia(Labirinto labirinto,IO io) {
+		this.partita = new Partita();
 		this.labirinto = labirinto;
 		this.ioConsole = io;
 	}
