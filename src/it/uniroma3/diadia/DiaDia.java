@@ -34,7 +34,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	private Partita partita;
+	public Partita partita;
 
 	private IO ioConsole;
 
@@ -47,12 +47,14 @@ public class DiaDia {
 		this.ioConsole = ioConsole;
 	}
 	
-	//costruttore per LabirintoBuilder
-	public DiaDia(Labirinto labirinto,IO io) {
-		this.partita = new Partita();
-		this.labirinto = labirinto;
-		this.ioConsole = io;
-	}
+
+	
+	//costruttore per LabirintoBuilder che passa il labirinto a partita
+		public DiaDia(Labirinto labirinto,IO io) {
+			this.partita = new Partita(labirinto);
+			this.labirinto = labirinto;
+			this.ioConsole = io;
+		}
 	
 	
 	
@@ -71,7 +73,7 @@ public class DiaDia {
 	 *
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
-	private boolean processaIstruzione(String istruzione) {
+	public boolean processaIstruzione(String istruzione) {
 		 Comando comandoDaEseguire;
 		 FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
 		 comandoDaEseguire = factory.costruisciComando(istruzione,this.ioConsole);
@@ -90,10 +92,26 @@ public class DiaDia {
 		
 		
 		
-		Labirinto labirinto = new LabirintoBuilder()
-				.addStanzaIniziale("LabCampusOne").
-				addStanzaVincente("Biblioteca").
-				addAdiacenza("LabCampusOne","Biblioteca","ovest").
+		Labirinto labirinto = new LabirintoBuilder().
+				addStanzaVincente("biblioteca")
+				.addStanzaIniziale("atrio").addAttrezzo("osso", 1).
+				addStanza("aulaN11").
+				addStanza("aulaN10").addAttrezzo("lanterna", 3).
+				addStanza("laboratorio").
+				addAdiacenza("atrio","biblioteca","nord").
+				addAdiacenza("atrio","aulaN11","est").
+				addAdiacenza("atrio","aulaN10","sud").
+				addAdiacenza("atrio","laboratorio","ovest").
+				addAdiacenza("aulaN11","laboratorio","est").
+				addAdiacenza("aulaN11","Atrio","ovest").
+				addAdiacenza("aulaN11","Atrio","ovest").
+				addAdiacenza("aulaN11","Atrio","ovest").
+				addAdiacenza("aulaN10","Atrio","nord").
+				addAdiacenza("aulaN10","aulaN11","est").
+				addAdiacenza("aulaN10","laboratorio","ovest").
+				addAdiacenza("laboratorio","atrio","est").
+				addAdiacenza("laboratorio","aulaN11","ovest").
+				addAdiacenza("biblioteca","atrio","sud").
 				getLabirinto();
 		
 		DiaDia gioco = new DiaDia(labirinto, ioConsole);
