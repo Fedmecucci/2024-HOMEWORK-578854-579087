@@ -10,8 +10,11 @@ import it.uniroma3.diadia.ambienti.Stanza;
  * e ne stampa il nome, altrimenti stampa un messaggio di errore
  */
 
-public class ComandoVai implements Comando {
+public class ComandoVai extends AbstractComando {
 	
+	
+
+
 	public IO ioConsole;
 	private String direzione;
 	public String nome;

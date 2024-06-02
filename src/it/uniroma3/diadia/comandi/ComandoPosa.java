@@ -5,7 +5,8 @@ import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPosa implements Comando {
+public class ComandoPosa extends  AbstractComando {
+	
 	
 	private IO ioConsole;
 	private String nomeAttrezzo;
@@ -23,13 +24,17 @@ public class ComandoPosa implements Comando {
 				this.ioConsole.mostraMessaggio("Attrezzo non posato nella stanza poiché piena");
 		}
     }
+    
+    @Override
     public void setParametro(String parametro) {
     	this.nomeAttrezzo = parametro;
     }
     
+    @Override
     public String getNome() {
 	    return "posa";
 	}
+    @Override
     public String getParametro() {
 		return this.nomeAttrezzo;
     }

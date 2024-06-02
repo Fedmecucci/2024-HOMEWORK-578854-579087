@@ -12,17 +12,12 @@ import it.uniroma3.diadia.Partita;
 //ComandoAiuto)
 
 
-public  abstract class AbstractComando {
+public  abstract class AbstractComando implements Comando{
 
 	private IO io;
 	private String nome;
 	private String parametro;
 	
-	public AbstractComando(IO io,String nomeComando,String parametro) {
-		this.io = io;
-		this.nome = nomeComando;
-		this.parametro = parametro;
-	}
 
 	public IO getIo() {
 		return io;
@@ -44,9 +39,11 @@ public  abstract class AbstractComando {
 		this.nome = nome;
 	}
 
-	public void setParametro(String parametro) {
+	public  void setParametro(String parametro) {
 		this.parametro = parametro;
 	}
 	
 	abstract public void esegui(Partita partita);
+	
+	
 }

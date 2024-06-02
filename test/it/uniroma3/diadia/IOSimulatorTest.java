@@ -42,7 +42,7 @@ class IOSimulatorTest {
 	}
 
 	@Test
-	public void testComandoVittoria() {
+	public void testComandoVittoria() throws Exception {
 	        HashMap<Integer, String> inputSimulato = new HashMap<>();
 	        inputSimulato.put(0, "vai nord");
 
@@ -58,7 +58,7 @@ class IOSimulatorTest {
 	}
 	
 	@Test
-	public void test5ComandiVaiPrendiPosaVittoria() {
+	public void test5ComandiVaiPrendiPosaVittoria() throws Exception {
 		HashMap<Integer, String> inputSimulato = new HashMap<>();
         inputSimulato.put(0, "vai sud");
         inputSimulato.put(1, "prendi lanterna");

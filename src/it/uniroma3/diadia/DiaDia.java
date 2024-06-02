@@ -7,8 +7,10 @@ import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.comandi.AbstractComando;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -58,7 +60,7 @@ public class DiaDia {
 	
 	
 	
-	public void gioca() {
+	public void gioca() throws Exception {
 		String istruzione; 
 
 		this.ioConsole.mostraMessaggio(MESSAGGIO_BENVENUTO);
@@ -72,12 +74,16 @@ public class DiaDia {
 	 * Processa una istruzione 
 	 *
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
+	 * @throws Exception 
 	 */
-	public boolean processaIstruzione(String istruzione) {
-		 Comando comandoDaEseguire;
-		 FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
-		 comandoDaEseguire = factory.costruisciComando(istruzione,this.ioConsole);
+	public boolean processaIstruzione(String istruzione) throws Exception {
+		 AbstractComando comandoDaEseguire = null;
+		 FabbricaDiComandiRiflessiva factory = new FabbricaDiComandiRiflessiva();
+		
+			comandoDaEseguire =  (AbstractComando) factory.costruisciComando(istruzione,this.ioConsole);
+   
 		 comandoDaEseguire.esegui(this.partita); 
+  
 		 if (this.partita.vinta())
 		     this.ioConsole.mostraMessaggio("Hai vinto!");
 		 //if (!this.partita.giocatoreIsVivo())
@@ -87,7 +93,7 @@ public class DiaDia {
 
 	
 	
-	public static void main(String[] argc) {
+	public static void main(String[] argc) throws Exception {
 		IO ioConsole = new IOConsole();
 		
 		
