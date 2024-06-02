@@ -144,7 +144,6 @@ class BorsaTest {
 	}
 	
 	
-	
 	//metodo di utilità per l'aggiunta di attrezzi nella borsa
 	private Attrezzo CreoUnAttrezzoEMettiInBorsa(Borsa borsa,String nomeAttrezzo,int peso) {
 		Attrezzo attrezzo = new Attrezzo(nomeAttrezzo,peso);

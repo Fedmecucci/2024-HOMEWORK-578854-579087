@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -164,6 +165,8 @@ public class Stanza {
 
 	public List<String> getDirezioni() {
 	    return this.direzioni;
-    } 
+    }
+
+	
 
 }
