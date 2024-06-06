@@ -1,30 +1,26 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.IO;
-import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPosa extends  AbstractComando {
-	
-	
+public class ComandoRegala extends AbstractComando {
+
 	private IO ioConsole;
 	private String nomeAttrezzo;
-	
-    public void esegui(Partita partita){
-    	Attrezzo a = partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
+
+	@Override
+	public void esegui(Partita partita) {
+		Attrezzo a = partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
 		if(a==null)
 			this.ioConsole.mostraMessaggio("Attrezzo non presente nella borsa");
-		boolean aggiunta;
+		String stampa;
 		if(a != null) {
-			aggiunta = partita.getStanzaCorrente().addAttrezzo(a);
-			if(aggiunta==true)
-				this.ioConsole.mostraMessaggio("Attrezzo posato nella stanza");
-			else
-				this.ioConsole.mostraMessaggio("Attrezzo non posato nella stanza poiché piena");
+			stampa = partita.getStanzaCorrente().getPersonaggio().riceviRegalo(a, partita);
+				this.ioConsole.mostraMessaggio(stampa);
 		}
-    }
-    
+	}
+	
     @Override
     public void setParametro(String parametro) {
     	this.nomeAttrezzo = parametro;
@@ -32,7 +28,7 @@ public class ComandoPosa extends  AbstractComando {
     
     @Override
     public String getNome() {
-	    return "posa";
+	    return "regala";
 	}
     @Override
     public String getParametro() {
@@ -42,4 +38,5 @@ public class ComandoPosa extends  AbstractComando {
 	public void setIo(IO ioConsole) {
 		this.ioConsole=ioConsole;
 	}
+
 }

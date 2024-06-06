@@ -8,6 +8,9 @@ import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
+import it.uniroma3.diadia.personaggi.Cane;
+import it.uniroma3.diadia.personaggi.Mago;
+import it.uniroma3.diadia.personaggi.Strega;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -31,6 +34,8 @@ public class Stanza {
     private Map<String, Stanza> stanzeAdiacenti;
     private int numeroStanzeAdiacenti;
 	private List<String> direzioni;
+	
+	private AbstractPersonaggio personaggio;
     
     /**
      * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -43,6 +48,9 @@ public class Stanza {
         this.direzioni = new ArrayList<String>(NUMERO_MASSIMO_DIREZIONI);
         this.stanzeAdiacenti = new HashMap<>();
         this.attrezzi = new HashMap<>();
+        this.personaggio = new Mago("mago", "a", new Attrezzo("ATTREZZO", NUMERO_MASSIMO_ATTREZZI));
+        //this.personaggio = new Cane("cane", "a");
+        //this.personaggio = new Strega("strega", "a");
     }
 
     /**
@@ -63,6 +71,10 @@ public class Stanza {
      */
 	public Stanza getStanzaAdiacente(String direzione) {
         return this.stanzeAdiacenti.get(direzione);
+	}
+	
+	public Map<String, Stanza> getAdiacenti() {
+		return this.stanzeAdiacenti;
 	}
 
     /**
@@ -166,6 +178,15 @@ public class Stanza {
 	public List<String> getDirezioni() {
 	    return this.direzioni;
     }
+	
+	
+	
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+	   this.personaggio = personaggio;
+	}
+	public AbstractPersonaggio getPersonaggio() {
+	   return this.personaggio;
+	 }
 
 	
 

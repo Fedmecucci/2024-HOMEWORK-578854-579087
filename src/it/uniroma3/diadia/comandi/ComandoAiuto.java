@@ -8,7 +8,7 @@ public class ComandoAiuto extends AbstractComando {
 
 	
 
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa", "guarda"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa", "guarda", "saluta", "interagisci", "regala"};
 
 	private IO ioConsole;
 
