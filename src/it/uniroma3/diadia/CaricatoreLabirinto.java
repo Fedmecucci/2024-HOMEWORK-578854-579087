@@ -41,10 +41,9 @@ public class CaricatoreLabirinto {
 	private Stanza stanzaVincente;
 
 
-	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException, FormatoFileNonValidoException {
+	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
 		this.nome2stanza = new HashMap<String,Stanza>();
 		this.reader = new LineNumberReader(new FileReader(nomeFile));
-		this.carica();
 	}
 
 	public void carica() throws FormatoFileNonValidoException {
@@ -85,10 +84,11 @@ public class CaricatoreLabirinto {
 	private List<String> separaStringheAlleVirgole(String string) {
 		List<String> result = new LinkedList<>();
 		Scanner scanner = new Scanner(string);
-		scanner.useDelimiter(",");
-		try (Scanner scannerDiParole = scanner) {
-			result.add(scannerDiParole.next());
-		}
+		scanner.useDelimiter(","); // Usa una virgola seguita da qualsiasi numero di spazi bianchi come delimitatore
+	    while (scanner.hasNext()) {
+	        result.add(scanner.next()); // Aggiungi alla lista rimuovendo gli spazi bianchi iniziali e finali
+	    }
+	    scanner.close();
 		return result;
 	}
 
@@ -124,6 +124,7 @@ public class CaricatoreLabirinto {
 
 	private void posaAttrezzo(String nomeAttrezzo, String pesoAttrezzo, String nomeStanza) throws FormatoFileNonValidoException {
 		int peso;
+		nomeStanza = " "+nomeStanza;
 		try {
 			peso = Integer.parseInt(pesoAttrezzo);
 			Attrezzo attrezzo = new Attrezzo(nomeAttrezzo, peso);
@@ -162,8 +163,11 @@ public class CaricatoreLabirinto {
 	}
 
 	private void impostaUscita(String stanzaDa, String dir, String nomeA) throws FormatoFileNonValidoException {
+		stanzaDa = " " + stanzaDa;
+		nomeA = " " + nomeA;
+		dir = " " + dir;
 		check(isStanzaValida(stanzaDa),"Stanza di partenza sconosciuta "+dir);
-		check(isStanzaValida(nomeA),"Stanza di destinazione sconosciuta "+ dir);
+		//check(isStanzaValida(nomeA),"Stanza di destinazione sconosciuta "+ dir);
 		Stanza partenzaDa = this.nome2stanza.get(stanzaDa);
 		Stanza arrivoA = this.nome2stanza.get(nomeA);
 		partenzaDa.impostaStanzaAdiacente(dir, arrivoA);

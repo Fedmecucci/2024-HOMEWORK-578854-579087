@@ -98,27 +98,29 @@ public class DiaDia {
 		
 		
 		
-		Labirinto labirinto = new LabirintoBuilder().
-				addStanzaVincente("biblioteca")
-				.addStanzaIniziale("atrio").addAttrezzo("osso", 1).
-				addStanza("aulaN11").
-				addStanza("aulaN10").addAttrezzo("lanterna", 3).
-				addStanza("laboratorio").
-				addAdiacenza("atrio","biblioteca","nord").
-				addAdiacenza("atrio","aulaN11","est").
-				addAdiacenza("atrio","aulaN10","sud").
-				addAdiacenza("atrio","laboratorio","ovest").
-				addAdiacenza("aulaN11","laboratorio","est").
-				addAdiacenza("aulaN11","Atrio","ovest").
-				addAdiacenza("aulaN11","Atrio","ovest").
-				addAdiacenza("aulaN11","Atrio","ovest").
-				addAdiacenza("aulaN10","Atrio","nord").
-				addAdiacenza("aulaN10","aulaN11","est").
-				addAdiacenza("aulaN10","laboratorio","ovest").
-				addAdiacenza("laboratorio","atrio","est").
-				addAdiacenza("laboratorio","aulaN11","ovest").
-				addAdiacenza("biblioteca","atrio","sud").
-				getLabirinto();
+//		Labirinto labirinto = new LabirintoBuilder().
+//				addStanzaVincente("biblioteca")
+//				.addStanzaIniziale("atrio").addAttrezzo("osso", 1).
+//				addStanza("aulaN11").
+//				addStanza("aulaN10").addAttrezzo("lanterna", 3).
+//				addStanza("laboratorio").
+//				addAdiacenza("atrio","biblioteca","nord").
+//				addAdiacenza("atrio","aulaN11","est").
+//				addAdiacenza("atrio","aulaN10","sud").
+//				addAdiacenza("atrio","laboratorio","ovest").
+//				addAdiacenza("aulaN11","laboratorio","est").
+//				addAdiacenza("aulaN11","Atrio","ovest").
+//				addAdiacenza("aulaN11","Atrio","ovest").
+//				addAdiacenza("aulaN11","Atrio","ovest").
+//				addAdiacenza("aulaN10","Atrio","nord").
+//				addAdiacenza("aulaN10","aulaN11","est").
+//				addAdiacenza("aulaN10","laboratorio","ovest").
+//				addAdiacenza("laboratorio","atrio","est").
+//				addAdiacenza("laboratorio","aulaN11","ovest").
+//				addAdiacenza("biblioteca","atrio","sud").
+//				getLabirinto();
+		
+		Labirinto labirinto = new Labirinto("src/it/uniroma3/diadia/primolabirinto.txt");
 		
 		DiaDia gioco = new DiaDia(labirinto, ioConsole);
 		gioco.gioca();
