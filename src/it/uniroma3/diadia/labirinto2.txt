@@ -1,0 +1,5 @@
+Stanze: Atrio, Biblioteca 
+Inizio: Atrio
+Vincente: Biblioteca
+Attrezzi: martello 3 Atrio
+Uscite: Atrio nord Biblioteca, Biblioteca sud Atrio

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
@@ -187,6 +188,19 @@ public class Stanza {
 	public AbstractPersonaggio getPersonaggio() {
 	   return this.personaggio;
 	 }
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nome);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null)
+			return false;
+		Stanza that = (Stanza) o;
+		return this.getNome().equals(that.getNome());
+	}
 
 	
 
