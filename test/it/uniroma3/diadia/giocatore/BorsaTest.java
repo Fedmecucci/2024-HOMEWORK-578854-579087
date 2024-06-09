@@ -2,6 +2,7 @@ package it.uniroma3.diadia.giocatore;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -39,7 +40,7 @@ class BorsaTest {
 	
 	
 	@BeforeEach
-	public void setUp() {
+	public void setUp() throws IOException {
 		this.borsa= new Borsa(DEFAULT_PESO_MAX_BORSA);
 		
 		this.martello = new Attrezzo("Martello", 2);

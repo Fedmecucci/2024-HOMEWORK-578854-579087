@@ -1,18 +1,20 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.io.IOException;
+
 public class StanzaBloccata extends Stanza{
 	
 	private String direzioneBloccata;
 	private String attrezzoSbloccante;
 	
-	public StanzaBloccata(String nome, String direzioneBloccata, String attrezzoSbloccante) {
+	public StanzaBloccata(String nome, String direzioneBloccata, String attrezzoSbloccante) throws IOException {
 		super(nome);
 		this.direzioneBloccata = direzioneBloccata;
 		this.attrezzoSbloccante = attrezzoSbloccante;
 	}
 	
 	@Override
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		if(super.hasAttrezzo(attrezzoSbloccante)) {
 			return super.getStanzaAdiacente(direzione);
 		}
@@ -30,7 +32,7 @@ public class StanzaBloccata extends Stanza{
 		StringBuilder risultato = new StringBuilder();
     	risultato.append(this.getNome());
     	risultato.append("\nUscite: ");
-    	for (String direzione : this.getDirezioni())
+    	for (Direzione direzione : this.getDirezioni())
     		if (direzione!=null)
     			risultato.append(" " + direzione);
     	//risultato.append("\nAttrezzi nella stanza: ");

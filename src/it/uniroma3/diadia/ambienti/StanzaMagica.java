@@ -1,18 +1,22 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.io.IOException;
+
+import it.uniroma3.diadia.Proprietà;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaMagica extends Stanza{
 
-	final static private int SOGLIA_MAGICA_DEFAULT = 3;
+	//final static private int SOGLIA_MAGICA_DEFAULT = 3;
+	
 	private int contatoreAttrezziPosati;
 	private int sogliaMagica;
 
-	public StanzaMagica(String nome) {
-		this(nome, SOGLIA_MAGICA_DEFAULT);
+	public StanzaMagica(String nome) throws IOException {
+		this(nome, Proprietà.getInstance().getPesoMax());
 	}
 
-	public StanzaMagica(String nome, int soglia) {
+	public StanzaMagica(String nome, int soglia) throws IOException {
 		super(nome);
 		this.contatoreAttrezziPosati = 0;
 		this.sogliaMagica = soglia;

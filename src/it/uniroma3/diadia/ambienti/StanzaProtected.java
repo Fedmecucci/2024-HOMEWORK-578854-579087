@@ -1,11 +1,17 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import it.uniroma3.diadia.Proprietà;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaProtected {
 
-	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
-	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
+	//static final private int NUMERO_MASSIMO_DIREZIONI = 4;
+	//static final private int NUMERO_MASSIMO_ATTREZZI = 10;
+	private int numeroMaxDirezioni;
+	private int numeroMaxAttrezzi;
 	
 	protected String nome;
 	protected Attrezzo[] attrezzi;
@@ -17,14 +23,20 @@ public class StanzaProtected {
     /**
      * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
      * @param nome il nome della stanza
+     * @throws IOException 
      */
-    public StanzaProtected(String nome) {
+    public StanzaProtected(String nome) throws IOException {
         this.nome = nome;
         this.numeroStanzeAdiacenti = 0;
         this.numeroAttrezzi = 0;
-        this.direzioni = new String[NUMERO_MASSIMO_DIREZIONI];
-        this.stanzeAdiacenti = new Stanza[NUMERO_MASSIMO_DIREZIONI];
-        this.attrezzi = new Attrezzo[NUMERO_MASSIMO_ATTREZZI];
+        
+        Proprietà proprietà = Proprietà.getInstance();
+        this.numeroMaxDirezioni = proprietà.getNumeroMaxDirezioni();
+        this.numeroMaxAttrezzi = proprietà.getLimitePesoAttrezzi();
+        
+        this.direzioni = new String[this.numeroMaxDirezioni];
+        this.stanzeAdiacenti = new Stanza[this.numeroMaxDirezioni];
+        this.attrezzi = new Attrezzo[this.numeroMaxAttrezzi];
     }
 
     /**
@@ -41,7 +53,7 @@ public class StanzaProtected {
         		aggiornato = true;
         	}
     	if (!aggiornato)
-    		if (this.numeroStanzeAdiacenti < NUMERO_MASSIMO_DIREZIONI) {
+    		if (this.numeroStanzeAdiacenti < this.numeroMaxDirezioni) {
     			this.direzioni[numeroStanzeAdiacenti] = direzione;
     			this.stanzeAdiacenti[numeroStanzeAdiacenti] = stanza;
     		    this.numeroStanzeAdiacenti++;
@@ -90,7 +102,7 @@ public class StanzaProtected {
      * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
      */
     public boolean addAttrezzo(Attrezzo attrezzo) {
-        if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
+        if (this.numeroAttrezzi < this.numeroMaxAttrezzi) {
         	this.attrezzi[numeroAttrezzi] = attrezzo;
         	this.numeroAttrezzi++;
         	return true;

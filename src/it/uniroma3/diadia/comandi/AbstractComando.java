@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.comandi;
 
+import java.io.IOException;
+
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
@@ -43,7 +45,7 @@ public  abstract class AbstractComando implements Comando{
 		this.parametro = parametro;
 	}
 	
-	abstract public void esegui(Partita partita);
+	abstract public void esegui(Partita partita) throws IOException;
 	
 	
 }

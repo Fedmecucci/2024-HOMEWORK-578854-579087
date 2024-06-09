@@ -1,6 +1,7 @@
 package it.uniroma3.diadia;
 
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
@@ -44,7 +45,7 @@ public class DiaDia {
 	
 	
 	
-	public DiaDia(IO ioConsole) {
+	public DiaDia(IO ioConsole) throws IOException {
 		this.partita = new Partita();
 		this.ioConsole = ioConsole;
 	}
@@ -52,7 +53,7 @@ public class DiaDia {
 
 	
 	//costruttore per LabirintoBuilder che passa il labirinto a partita
-		public DiaDia(Labirinto labirinto,IO io) {
+		public DiaDia(Labirinto labirinto,IO io) throws IOException {
 			this.partita = new Partita(labirinto);
 			this.labirinto = labirinto;
 			this.ioConsole = io;
@@ -120,7 +121,8 @@ public class DiaDia {
 //				addAdiacenza("biblioteca","atrio","sud").
 //				getLabirinto();
 		
-		Labirinto labirinto = new Labirinto("src/it/uniroma3/diadia/primolabirinto.txt");
+		//Labirinto labirinto = new Labirinto("src/it/uniroma3/diadia/primolabirinto.txt");
+		Labirinto labirinto = new Labirinto("src/it/uniroma3/diadia/labirinto2.txt");
 		
 		DiaDia gioco = new DiaDia(labirinto, ioConsole);
 		gioco.gioca();

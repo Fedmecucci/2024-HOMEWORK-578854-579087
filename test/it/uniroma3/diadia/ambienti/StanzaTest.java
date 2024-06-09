@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,7 @@ class StanzaTest {
 	    protected int numeroAttrezzi;
 	    
 	    @BeforeEach
-	    public void setUp() {
+	    public void setUp() throws IOException {
 	    	this.stanza = new Stanza(STANZA);
 	    	this.a = new Attrezzo(ATTREZZO, 24);
 	    	this.attrezzi = new HashMap<String,Attrezzo>();
@@ -35,26 +36,26 @@ class StanzaTest {
 	    }
 	    
 	    @Test
-	    public void testImpostaStanzaAdiacenteSingola() {
-	    	Stanza adiacente = creaStanzaEImpostaAdiacente(this.stanza,STANZA_ADIACENTE ,NORD);
-	    	assertEquals(adiacente,this.stanza.getStanzaAdiacente(NORD));
+	    public void testImpostaStanzaAdiacenteSingola() throws IOException {
+	    	Stanza adiacente = creaStanzaEImpostaAdiacente(this.stanza,STANZA_ADIACENTE ,Direzione.nord);
+	    	assertEquals(adiacente,this.stanza.getStanzaAdiacente(Direzione.nord));
 	    }
 	    
 	   @Test
 	    public void testGetStanzaAdiacenteNonEsistente() {
-	    	assertNull(this.stanza.getStanzaAdiacente(NORD));
+	    	assertNull(this.stanza.getStanzaAdiacente(Direzione.nord));
 	    }
 	    
 	    @Test
-	     public void testGetStanzaAdiacenteEsistente() {
-	    	creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, NORD);
-	    	assertNotNull(this.stanza.getStanzaAdiacente(NORD));
+	     public void testGetStanzaAdiacenteEsistente() throws IOException {
+	    	creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, Direzione.nord);
+	    	assertNotNull(this.stanza.getStanzaAdiacente(Direzione.nord));
 	    }
 	    
 	    @Test
-	    public void testGetStanzaAdiacenteDirezioneNonValida() {
-	    	creaStanzaEImpostaAdiacente(this.stanza,STANZA_ADIACENTE, NORD);
-	    	assertNull(this.stanza.getStanzaAdiacente("nonValida"));
+	    public void testGetStanzaAdiacenteDirezioneNonValida() throws IOException {
+	    	creaStanzaEImpostaAdiacente(this.stanza,STANZA_ADIACENTE, Direzione.nord);
+	    	assertNull(this.stanza.getStanzaAdiacente(Direzione.est));
 	    }
 	    
 	  
@@ -66,9 +67,9 @@ class StanzaTest {
 	    
 	    //Nuovi test dopo implementazione collezioni
 	    @Test
-	    public void testGetDirezioniNonVuoto() {
+	    public void testGetDirezioniNonVuoto() throws IOException {
 	    	this.directions.add(NORD);
-	    	creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, NORD);
+	    	creaStanzaEImpostaAdiacente(this.stanza, STANZA_ADIACENTE, Direzione.nord);
 	    	assertEquals(this.directions, this.stanza.getDirezioni());
 	    }
 	    
@@ -114,7 +115,7 @@ class StanzaTest {
 	    
 	 // metodo di utilita per risparmiare righe di codice(in cui creo stanza adiacente)
 	    
-	  private Stanza creaStanzaEImpostaAdiacente(Stanza stanzaDiPartenza, String nomeStanzaAdiacente, String direzione) {
+	  private Stanza creaStanzaEImpostaAdiacente(Stanza stanzaDiPartenza, String nomeStanzaAdiacente, Direzione direzione) throws IOException {
 	    	Stanza stanzaAdiacente = new Stanza(nomeStanzaAdiacente);
 	    	stanzaDiPartenza.impostaStanzaAdiacente(direzione, stanzaAdiacente);
 	    	return stanzaAdiacente;

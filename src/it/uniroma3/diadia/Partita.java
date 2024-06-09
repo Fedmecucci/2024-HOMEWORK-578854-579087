@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+import java.io.IOException;
+
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -15,7 +17,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class Partita {
 
-	static final private int CFU_INIZIALI = 20;
+	//static final private int CFU_INIZIALI = 20;
 
 	private Stanza stanzaCorrente;
 	private Labirinto labirinto;
@@ -23,7 +25,7 @@ public class Partita {
 	private Giocatore giocatore;
 	
 	
-	public Partita(){
+	public Partita() throws IOException{
 		this.labirinto = new Labirinto();
 		this.stanzaCorrente= this.labirinto.getStanzaIniziale();
 		this.finita = false;
@@ -31,7 +33,7 @@ public class Partita {
 		}
 	
 	//Costruttore di partita per il labirinto
-	public Partita(Labirinto labirinto){
+	public Partita(Labirinto labirinto) throws IOException{
 		this.labirinto = labirinto;
 		this.stanzaCorrente= this.labirinto.getStanzaIniziale();
 		this.finita = false;

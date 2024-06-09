@@ -3,6 +3,8 @@ package it.uniroma3.diadia.ambienti;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,7 @@ class LabirintoTest {
 	private Labirinto labirinto;
 	
 	@BeforeEach
-	public void setUp() {
+	public void setUp() throws IOException {
 		this.labirinto = new Labirinto();
 	}
 

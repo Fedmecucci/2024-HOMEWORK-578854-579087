@@ -2,11 +2,14 @@ package it.uniroma3.diadia.comandi;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -21,21 +24,21 @@ class FabbricaDiComandiFisarmonicaTest {
 	private Borsa borsa;
 
 	@BeforeEach
-	void setUp() {
+	void setUp() throws IOException {
 		this.fabbrica = new FabbricaDiComandiFisarmonica();
 	   
 		this.partita = new Partita();
 		this.stanza1 = new Stanza("stanza1");
 		this.stanza2 = new Stanza("stanza2");
 		partita.setStanzaCorrente(stanza1);
-		partita.getStanzaCorrente().impostaStanzaAdiacente("nord", stanza2);
+		partita.getStanzaCorrente().impostaStanzaAdiacente(Direzione.nord, stanza2);
 		this.attrezzo = new Attrezzo("attrezzo", 2);
 		this.borsa = new Borsa();
 		partita.getStanzaCorrente().addAttrezzo(attrezzo);
 	}
 
 	@Test
-	void testCostruisciComandoVai() {
+	void testCostruisciComandoVai() throws IOException {
 		Comando comando = this.fabbrica.costruisciComando("vai nord", new IOConsole());
 		comando.esegui(partita);
 		assertEquals("vai", comando.getNome());
@@ -43,7 +46,7 @@ class FabbricaDiComandiFisarmonicaTest {
 	}
 	
 	@Test
-	public void testCostruisciComandoVaiConParametroNullo() {
+	public void testCostruisciComandoVaiConParametroNullo() throws IOException {
 		Comando comando = fabbrica.costruisciComando("vai", new IOConsole());
 		comando.esegui(partita);
 		assertEquals("vai", comando.getNome());
@@ -51,7 +54,7 @@ class FabbricaDiComandiFisarmonicaTest {
 	}
 
 	@Test
-	public void testCostruisciComandoAiuto() {
+	public void testCostruisciComandoAiuto() throws IOException {
     	Comando comando = fabbrica.costruisciComando("aiuto", new IOConsole());
     	comando.esegui(partita);
 		assertEquals("aiuto", comando.getNome());
@@ -59,7 +62,7 @@ class FabbricaDiComandiFisarmonicaTest {
 	}
 	
 	@Test
-	public void testCostruisciComandoPrendi() {
+	public void testCostruisciComandoPrendi() throws IOException {
 		Comando comando = fabbrica.costruisciComando("prendi chiave", new IOConsole());
 		comando.esegui(partita);
 		assertEquals("prendi", comando.getNome());

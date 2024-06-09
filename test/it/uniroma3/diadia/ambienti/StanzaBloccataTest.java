@@ -2,6 +2,8 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +17,7 @@ class StanzaBloccataTest {
 	private Attrezzo attrezzoSbloccante;
 
 	@BeforeEach
-	void setUp() {
+	void setUp() throws IOException {
 		attrezzoSbloccante = new Attrezzo("attrezzoSbloccante", 4);
 		stanza = new StanzaBloccata("stanza", "direzioneBloccata" , "attrezzoSbloccante");
 		stanzaAdiacente = new Stanza("adiacente");
@@ -23,14 +25,14 @@ class StanzaBloccataTest {
 
 	@Test
 	void testGetStanzaAdiacenteBloccata() {
-		assertEquals(stanza.getStanzaAdiacente("a caso"), stanza);
+		assertEquals(stanza.getStanzaAdiacente(Direzione.est), stanza);
 	}
 	
 	@Test
 	void testGetStanzaAdiacenteNonBloccata() {
-		stanza.impostaStanzaAdiacente("nord", stanzaAdiacente);
+		stanza.impostaStanzaAdiacente(Direzione.nord, stanzaAdiacente);
 		stanza.addAttrezzo(attrezzoSbloccante);
-		assertEquals(stanza.getStanzaAdiacente("nord"), stanzaAdiacente);
+		assertEquals(stanza.getStanzaAdiacente(Direzione.nord), stanzaAdiacente);
 	}
 	
 }

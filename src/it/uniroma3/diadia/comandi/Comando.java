@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.comandi;
 
+import java.io.IOException;
+
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
@@ -19,8 +21,9 @@ import it.uniroma3.diadia.Partita;
 public interface Comando {
     /**
     * esecuzione del comando
+     * @throws IOException 
     */
-    public void esegui(Partita partita);
+    public void esegui(Partita partita) throws IOException;
     /**
     * set parametro del comando
     */

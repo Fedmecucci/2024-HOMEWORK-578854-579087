@@ -1,12 +1,15 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
+import it.uniroma3.diadia.Proprietà;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 import it.uniroma3.diadia.personaggi.Cane;
@@ -26,30 +29,38 @@ import it.uniroma3.diadia.personaggi.Strega;
 
 public class Stanza {
 	
-	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
-	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
+	//static final private int NUMERO_MASSIMO_DIREZIONI = 4;
+	//static final private int NUMERO_MASSIMO_ATTREZZI = 10;
 	
 	private String nome;
     private Map<String, Attrezzo> attrezzi;
     public int numeroAttrezzi;
-    private Map<String, Stanza> stanzeAdiacenti;
+    private Map<Direzione, Stanza> stanzeAdiacenti;
     private int numeroStanzeAdiacenti;
-	private List<String> direzioni;
 	
 	private AbstractPersonaggio personaggio;
+	//private int numeroMaxDirezioni;
+	private int numeroMaxAttrezzi;
+	
+	private boolean aggiornato;
     
     /**
      * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
      * @param nome il nome della stanza
+     * @throws IOException 
      */
-    public Stanza(String nome) {
+    public Stanza(String nome) throws IOException {
         this.nome = nome;
         this.numeroStanzeAdiacenti = 0;
         this.numeroAttrezzi = 0;
-        this.direzioni = new ArrayList<String>(NUMERO_MASSIMO_DIREZIONI);
         this.stanzeAdiacenti = new HashMap<>();
         this.attrezzi = new HashMap<>();
-        this.personaggio = new Mago("mago", "a", new Attrezzo("ATTREZZO", NUMERO_MASSIMO_ATTREZZI));
+        
+        Proprietà proprietà = Proprietà.getInstance();
+        //this.numeroMaxDirezioni = proprietà.getNumeroMaxDirezioni();
+        this.numeroMaxAttrezzi = proprietà.getLimitePesoAttrezzi();
+        this.personaggio = new Mago("mago", "a", new Attrezzo("ATTREZZO", numeroMaxAttrezzi));
+        
         //this.personaggio = new Cane("cane", "a");
         //this.personaggio = new Strega("strega", "a");
     }
@@ -60,21 +71,26 @@ public class Stanza {
      * @param direzione direzione in cui sara' posta la stanza adiacente.
      * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
      */
-    public void impostaStanzaAdiacente(String direzione, Stanza stanzaAdiacente) {
-        this.stanzeAdiacenti.put(direzione, stanzaAdiacente);
-        this.direzioni.add(direzione);
-        this.numeroStanzeAdiacenti++;
+    public void impostaStanzaAdiacente(Direzione direzione, Stanza stanzaAdiacente) {
+    	if (this.stanzeAdiacenti.containsKey(direzione)) {
+			this.stanzeAdiacenti.put(direzione,stanzaAdiacente);
+			aggiornato = true;
+    	}
+        if(!aggiornato) {
+    	    this.stanzeAdiacenti.put(direzione, stanzaAdiacente);
+            this.numeroStanzeAdiacenti++;
+        }
     }
 
     /**
      * Restituisce la stanza adiacente nella direzione specificata
      * @param direzione
      */
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
         return this.stanzeAdiacenti.get(direzione);
 	}
 	
-	public Map<String, Stanza> getAdiacenti() {
+	public Map<Direzione, Stanza> getAdiacenti() {
 		return this.stanzeAdiacenti;
 	}
 
@@ -117,7 +133,7 @@ public class Stanza {
      * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
      */
     public boolean addAttrezzo(Attrezzo attrezzo) {
-    	if(this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
+    	if(this.numeroAttrezzi < this.numeroMaxAttrezzi) {
     		this.attrezzi.put(attrezzo.getNome(), attrezzo);
         	this.numeroAttrezzi++;
         	return true;
@@ -136,9 +152,7 @@ public class Stanza {
     	StringBuilder risultato = new StringBuilder();
     	risultato.append(this.nome);
     	risultato.append("\nUscite: ");
-    	for (String direzione : this.direzioni)
-    		if (direzione!=null)
-    			risultato.append(" " + direzione);
+    	risultato.append(this.getDirezioni().toString());
     	risultato.append("\nAttrezzi nella stanza: ");
     	for (Attrezzo a : this.attrezzi.values()) {
     		risultato.append(a.toString()+" ");
@@ -176,10 +190,9 @@ public class Stanza {
 	}
 
 
-	public List<String> getDirezioni() {
-	    return this.direzioni;
+	public Set<Direzione> getDirezioni() {
+	    return this.stanzeAdiacenti.keySet();
     }
-	
 	
 	
 	public void setPersonaggio(AbstractPersonaggio personaggio) {

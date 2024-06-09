@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.comandi;
 
+import java.io.IOException;
+
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
@@ -11,7 +13,7 @@ public class ComandoInteragisci extends AbstractComando {
 	private IO io;
 
 	@Override
-	public void esegui(Partita partita) {
+	public void esegui(Partita partita) throws IOException {
 		 AbstractPersonaggio personaggio;
 		 personaggio = partita.getStanzaCorrente().getPersonaggio();
 		 if (personaggio!=null) {

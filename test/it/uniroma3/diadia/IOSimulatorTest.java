@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 
@@ -23,20 +24,20 @@ class IOSimulatorTest {
 				addStanza("aulaN11").
 				addStanza("aulaN10").addAttrezzo("lanterna", 3).
 				addStanza("laboratorio").
-				addAdiacenza("atrio","biblioteca","nord").
-				addAdiacenza("atrio","aulaN11","est").
-				addAdiacenza("atrio","aulaN10","sud").
-				addAdiacenza("atrio","laboratorio","ovest").
-				addAdiacenza("aulaN11","laboratorio","est").
-				addAdiacenza("aulaN11","atrio","ovest").
-				addAdiacenza("aulaN11","atrio","ovest").
-				addAdiacenza("aulaN11","atrio","ovest").
-				addAdiacenza("aulaN10","atrio","nord").
-				addAdiacenza("aulaN10","aulaN11","est").
-				addAdiacenza("aulaN10","laboratorio","ovest").
-				addAdiacenza("laboratorio","atrio","est").
-				addAdiacenza("laboratorio","aulaN11","ovest").
-				addAdiacenza("biblioteca","atrio","sud").
+				addAdiacenza("atrio","biblioteca",Direzione.nord).
+				addAdiacenza("atrio","aulaN11",Direzione.est).
+				addAdiacenza("atrio","aulaN10",Direzione.sud).
+				addAdiacenza("atrio","laboratorio",Direzione.ovest).
+				addAdiacenza("aulaN11","laboratorio",Direzione.est).
+				addAdiacenza("aulaN11","atrio",Direzione.ovest).
+				addAdiacenza("aulaN11","atrio",Direzione.ovest).
+				addAdiacenza("aulaN11","atrio",Direzione.ovest).
+				addAdiacenza("aulaN10","atrio",Direzione.nord).
+				addAdiacenza("aulaN10","aulaN11",Direzione.est).
+				addAdiacenza("aulaN10","laboratorio",Direzione.ovest).
+				addAdiacenza("laboratorio","atrio",Direzione.est).
+				addAdiacenza("laboratorio","aulaN11",Direzione.ovest).
+				addAdiacenza("biblioteca","atrio",Direzione.sud).
 				getLabirinto();
 		
 	}

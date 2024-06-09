@@ -5,24 +5,27 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import it.uniroma3.diadia.Proprietà;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.attrezzi.ComparatoreAttrezzi;
 
 public class Borsa {
 
-	public final static int DEFAULT_PESO_MAX_BORSA = 10;
+	//public final static int DEFAULT_PESO_MAX_BORSA = 10;
+	
 	private Map<String, Attrezzo> attrezzi;
 	private int numeroAttrezzi;
 	private int pesoMax;
 	
-	public Borsa() {
-		this(DEFAULT_PESO_MAX_BORSA);
+	public Borsa() throws IOException {
+		this(Proprietà.getInstance().getPesoMax());
 	}
 	
 	public Borsa(int pesoMax) {

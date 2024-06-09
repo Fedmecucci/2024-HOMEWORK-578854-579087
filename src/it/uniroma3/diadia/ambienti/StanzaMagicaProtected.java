@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.io.IOException;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaMagicaProtected extends StanzaProtected{
@@ -9,11 +11,11 @@ public class StanzaMagicaProtected extends StanzaProtected{
 	private int contatoreAttrezziPosati;
 	private int sogliaMagica;
 	
-	public StanzaMagicaProtected(String nome) {
+	public StanzaMagicaProtected(String nome) throws IOException {
 	this(nome, SOGLIA_MAGICA_DEFAULT);
 	}
 	
-	public StanzaMagicaProtected(String nome, int soglia) {
+	public StanzaMagicaProtected(String nome, int soglia) throws IOException {
 	super(nome);
 	this.contatoreAttrezziPosati = 0;
 	this.sogliaMagica = soglia;

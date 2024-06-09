@@ -2,6 +2,8 @@ package it.uniroma3.diadia.comandi;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +17,7 @@ class ComandoPrendiTest {
     private ComandoPrendi comandoPrendi;
 
 	@BeforeEach
-	public void setUp() {
+	public void setUp() throws IOException {
 		this.partita = new Partita();
 		this.comandoPrendi = new ComandoPrendi();
 		this.comandoPrendi.setIo(new IOConsole());

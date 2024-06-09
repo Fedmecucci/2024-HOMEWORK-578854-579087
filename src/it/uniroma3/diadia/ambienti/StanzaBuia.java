@@ -1,11 +1,13 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.io.IOException;
+
 public class StanzaBuia extends Stanza{
 	
 	private String AttrezzoPerVedere;
 	public static final String STANZA_BUIA ="Qui c'è buio pesto";
 	
-	public StanzaBuia(String nome,String AttrezzoPerVedere) {
+	public StanzaBuia(String nome,String AttrezzoPerVedere) throws IOException {
 		super(nome);
 		this.AttrezzoPerVedere=AttrezzoPerVedere;
 	}

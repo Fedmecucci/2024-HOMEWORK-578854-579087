@@ -2,6 +2,7 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ class LabirintoBuilderTest {
 	}
 	
 	@Test
-	public void testMonolocale() {
+	public void testMonolocale() throws IOException {
 		Labirinto monolocale = labirintoBuilder
 				.addStanzaIniziale(nomeStanzaIniziale)
 				.addStanzaVincente(nomeStanzaIniziale)
@@ -38,7 +39,7 @@ class LabirintoBuilderTest {
 	}
 	
 	@Test
-	public void testMonolocale2() {
+	public void testMonolocale2() throws IOException {
 		Labirinto monolocale2 = labirintoBuilder
 				.addStanzaIniziale("biblioteca")
 				.addStanzaVincente("ufficio")
@@ -51,7 +52,7 @@ class LabirintoBuilderTest {
 	
 	
 	@Test
-	public void testMonolocaleConAttrezzo() {
+	public void testMonolocaleConAttrezzo() throws IOException {
 		Labirinto monolocale = labirintoBuilder
 				.addStanzaIniziale(nomeStanzaIniziale).addAttrezzo("spada",1)
 				.addStanzaVincente(nomeStanzaIniziale).addAttrezzo("spadina", 3)
@@ -65,33 +66,33 @@ class LabirintoBuilderTest {
 	
 	
 	@Test
-	public void testBilocale() {
+	public void testBilocale() throws IOException {
 		Labirinto bilocale = labirintoBuilder
 				.addStanzaIniziale(nomeStanzaIniziale)
 				.addStanzaVincente(nomeStanzaVincente)
-				.addAdiacenza(nomeStanzaIniziale, nomeStanzaVincente, "nord")
-				.addAdiacenza(nomeStanzaVincente, nomeStanzaIniziale, "sud")
+				.addAdiacenza(nomeStanzaIniziale, nomeStanzaVincente, Direzione.nord)
+				.addAdiacenza(nomeStanzaVincente, nomeStanzaIniziale, Direzione.sud)
 				.getLabirinto();
-		assertEquals(bilocale.getStanzaVincente(),bilocale.getStanzaIniziale().getStanzaAdiacente("nord"));
-		assertEquals(Collections.singletonList("nord"),bilocale.getStanzaIniziale().getDirezioni());
-		assertEquals(Collections.singletonList("sud"),bilocale.getStanzaVincente().getDirezioni());
+		assertEquals(bilocale.getStanzaVincente(),bilocale.getStanzaIniziale().getStanzaAdiacente(Direzione.nord));
+		assertEquals(Collections.singletonList(Direzione.nord),bilocale.getStanzaIniziale().getDirezioni());
+		assertEquals(Collections.singletonList(Direzione.sud),bilocale.getStanzaVincente().getDirezioni());
 	}
 
 	@Test
-	public void testTrilocale(){
+	public void testTrilocale() throws IOException{
 		Labirinto trilocale = labirintoBuilder
 				.addStanzaIniziale(nomeStanzaIniziale).addAttrezzo("sedia", 1)
 				.addStanza("biblioteca")
-				.addAdiacenza(nomeStanzaIniziale, "biblioteca", "sud")
-				.addAdiacenza("biblioteca", nomeStanzaIniziale, "nord")
+				.addAdiacenza(nomeStanzaIniziale, "biblioteca", Direzione.sud)
+				.addAdiacenza("biblioteca", nomeStanzaIniziale, Direzione.nord)
 				.addAttrezzo("libro antico", 5)
 				.addStanzaVincente(nomeStanzaVincente)
-				.addAdiacenza("biblioteca", nomeStanzaVincente, "est")
-				.addAdiacenza(nomeStanzaVincente,"biblioteca" , "ovest")
+				.addAdiacenza("biblioteca", nomeStanzaVincente, Direzione.est)
+				.addAdiacenza(nomeStanzaVincente,"biblioteca" , Direzione.ovest)
 				.getLabirinto();	
 		assertEquals(nomeStanzaIniziale, trilocale.getStanzaIniziale().getNome());
 		assertEquals(nomeStanzaVincente, trilocale.getStanzaVincente().getNome());
-		assertEquals("biblioteca",trilocale.getStanzaIniziale().getStanzaAdiacente("sud").getNome());
+		assertEquals("biblioteca",trilocale.getStanzaIniziale().getStanzaAdiacente(Direzione.sud).getNome());
 	}
 	
 	

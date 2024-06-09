@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.personaggi;
 
+import java.io.IOException;
+
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -41,7 +43,7 @@ public abstract class AbstractPersonaggio {
 		return risposta.toString();
 	}
 
-	abstract public String agisci(Partita partita);
+	abstract public String agisci(Partita partita) throws IOException;
 	
 	public abstract String riceviRegalo(Attrezzo attrezzo, Partita partita);
 
