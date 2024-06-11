@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+//import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.AbstractComando;
@@ -95,7 +95,8 @@ public class DiaDia {
 	
 	
 	public static void main(String[] argc) throws Exception {
-		IO ioConsole = new IOConsole();
+		Scanner scanner = new Scanner(System.in);
+		IO ioConsole = new IOConsole(scanner);
 		
 		
 		
@@ -126,5 +127,6 @@ public class DiaDia {
 		
 		DiaDia gioco = new DiaDia(labirinto, ioConsole);
 		gioco.gioca();
+		scanner.close();
 	}
 }

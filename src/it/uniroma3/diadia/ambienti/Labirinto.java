@@ -1,10 +1,16 @@
 package it.uniroma3.diadia.ambienti;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import it.uniroma3.diadia.CaricatoreLabirinto;
 import it.uniroma3.diadia.FormatoFileNonValidoException;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.Cane;
+import it.uniroma3.diadia.personaggi.Mago;
+import it.uniroma3.diadia.personaggi.Strega;
 
 public class Labirinto {
 
@@ -64,6 +70,12 @@ public class Labirinto {
 //		stanzaVincente = biblioteca;
 //    }
 	
+	
+	//costruttore classe nidificata
+	public static LabirintoBuilder newBuilder() throws FormatoFileNonValidoException, IOException {
+		return new LabirintoBuilder();
+	}
+	
 	public Stanza getStanzaIniziale() {
 		return stanzaIniziale;
 	}
@@ -78,4 +90,86 @@ public class Labirinto {
 	public void setStanzaVincente(Stanza stanzaVincente) {
 		this.stanzaVincente = stanzaVincente;
 	}
+	
+	//===========================================
+		public static class LabirintoBuilder {
+			
+			
+			
+
+			private Stanza appoggio;
+		private ArrayList<Stanza> stanze;
+		//
+		public LabirintoBuilder() throws IOException {
+			super();
+			this.appoggio= null;
+			this.stanze = new ArrayList<Stanza>();
+		}
+		
+			public Labirinto getLabirinto() {
+			return this.getLabirinto();
+		}
+		
+			public LabirintoBuilder addStanzaIniziale(String s) throws IOException {
+			this.appoggio = new Stanza(s);
+				stanze.add(appoggio);
+			this.getLabirinto().setStanzaIniziale(appoggio);
+			return this;
+		}
+		
+			public LabirintoBuilder addStanzaVincente(String s) throws IOException {
+				this.appoggio = new Stanza(s);
+				stanze.add(appoggio);
+			this.getLabirinto().setStanzaVincente(appoggio);
+			return this;
+		}
+		
+			public LabirintoBuilder addAttrezzo(String nome, int p) {
+ 			this.appoggio.addAttrezzo(new Attrezzo(nome,p));
+			return this;
+			}
+		
+		public LabirintoBuilder addStanzaBloccata(String nome,String direzione,String pass) throws IOException {
+				Stanza s= new StanzaBloccata(nome,direzione,pass);
+				this.appoggio = s;
+			this.stanze.add(s);
+			return this;
+			}
+		
+			public LabirintoBuilder addStanzaBuia(String nome,String luce) throws IOException {
+				Stanza s= new StanzaBuia(nome,luce);
+				this.appoggio = s;
+				this.stanze.add(s);
+			return this;
+			}
+			
+			public LabirintoBuilder addStanzaMagica(String nome,int soglia) throws IOException {
+				Stanza s= new StanzaMagica(nome,soglia);
+				this.appoggio=s;
+				this.stanze.add(s);
+				return this;
+				
+			}
+			
+			public LabirintoBuilder addAdiacenza(String s1,String s2,Direzione dir) {
+				Stanza nonInizializzata = null;
+				Stanza adiacente = null;
+				for(Stanza stanza : stanze) {
+					if(stanza.getNome()==s1)
+						nonInizializzata=stanza;
+				if(stanza.getNome()==s2)
+						adiacente = stanza;
+			}
+				nonInizializzata.impostaStanzaAdiacente(dir, adiacente);
+				return this;
+			}
+			
+		public LabirintoBuilder addStanza(String s) throws IOException {
+				this.appoggio= new Stanza(s);
+				stanze.add(appoggio);
+			return this;
+		}
+			
+		}
+
 }
