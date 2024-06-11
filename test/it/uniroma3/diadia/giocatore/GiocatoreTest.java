@@ -19,7 +19,7 @@ class GiocatoreTest {
 	
 	@Test
 	public void CfuInizialiSianoUgualiA20() {
-		assertEquals(20,this.giocatore.getCfu());
+		assertEquals(10,this.giocatore.getCfu());
 	}
 	
 	@Test

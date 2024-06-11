@@ -8,14 +8,16 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+
 class PartitaTest {
 
 	private Partita partita;
 	
 	@BeforeEach
-	public void setUp() throws IOException {
-		this.partita = new Partita();
-		
+	public void setUp() throws IOException, FormatoFileNonValidoException {
+		Labirinto labirinto = new Labirinto("src/it/uniroma3/diadia/labirinto2.txt");
+		this.partita = new Partita(labirinto);		
 	}
 	
 	@Test

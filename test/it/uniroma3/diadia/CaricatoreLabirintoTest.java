@@ -32,8 +32,8 @@ public class CaricatoreLabirintoTest {
         // Act
         caricatore.carica();
         
-        assertEquals(" Stanza1", this.caricatore.getStanzaIniziale().getNome());
-		assertEquals(" Stanza1", this.caricatore.getStanzaVincente().getNome());
+        assertEquals("Stanza1", this.caricatore.getStanzaIniziale().getNome());
+		assertEquals("Stanza1", this.caricatore.getStanzaVincente().getNome());
 
     }
 
@@ -44,15 +44,15 @@ public class CaricatoreLabirintoTest {
                                     "Inizio: Stanza1\n" +
                                     "Vincente: Stanza2\n" +
                                     "Attrezzi: Spada 3 Stanza1, Scudo 2 Stanza2\n" +
-                                    "Uscite: Stanza1 nord Stanza2, Stanza2 sud Stanza1";
+                                    "Uscite: Stanza1 nord Stanza2 Stanza2 sud Stanza1";
         
         caricatore = new CaricatoreLabirinto(new StringReader(specificaLabirinto));
 
         // Act
         caricatore.carica();
         
-        assertEquals(" Stanza1", this.caricatore.getStanzaIniziale().getNome());
-		assertEquals(" Stanza2", this.caricatore.getStanzaVincente().getNome());
+        assertEquals("Stanza1", this.caricatore.getStanzaIniziale().getNome());
+		assertEquals("Stanza2", this.caricatore.getStanzaVincente().getNome());
 		
 		Attrezzo expected = new Attrezzo("Spada", 3);
 		assertEquals(expected, this.caricatore.getStanzaIniziale().getAttrezzo("Spada"));

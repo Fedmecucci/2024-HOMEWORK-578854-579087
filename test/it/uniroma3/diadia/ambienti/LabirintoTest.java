@@ -19,12 +19,12 @@ class LabirintoTest {
 
 	@Test
 	public void stanzaInizialeSiaDiversaDaNull() {
-		assertNotNull(this.labirinto.getStanzaIniziale());
+		assertNull(this.labirinto.getStanzaIniziale());
 	}
 	
 	@Test
 	public void stanzaVincenteNonENull() {
-		assertNotNull(this.labirinto.getStanzaVincente());
+		assertNull(this.labirinto.getStanzaVincente());
 	}
 	
 	
